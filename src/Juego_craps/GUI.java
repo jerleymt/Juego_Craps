@@ -49,9 +49,13 @@ public class GUI extends JFrame {
     public static void main(String[] args){
         EventQueue.invokeLater(() -> {
             GUI miProjectGUI = new GUI();
+
+            Tirar_dados tir01 = new Tirar_dados();
+            tir01.tirar_dado();
+            System.out.println("hola mundo");
+
         });
     }
-
     /**
      * inner class that extends an Adapter Class or implements Listeners used by GUI class
      */
