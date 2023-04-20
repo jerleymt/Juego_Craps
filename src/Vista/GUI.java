@@ -1,6 +1,7 @@
 package Vista;
 
 import Modelo.Header;
+import Modelo.Reglas_tiro;
 import Modelo.Tirar_dados;
 
 import javax.swing.*;
@@ -53,9 +54,14 @@ public class GUI extends JFrame {
         EventQueue.invokeLater(() -> {
             GUI miProjectGUI = new GUI();
 
-            Tirar_dados tir01 = new Tirar_dados();
-            tir01.tirar_dado();
-            System.out.println("hola mundo");
+            Tirar_dados tirar = new Tirar_dados(10);
+            Reglas_tiro jugar = new Reglas_tiro();
+
+            tirar.tirar_dado();
+
+            jugar.setTiro(tirar.getSumatoria());
+
+            System.out.println("estado del juego = "+jugar.getEstado()+" || El tiro fue "+tirar.getSumatoria());
 
         });
     }

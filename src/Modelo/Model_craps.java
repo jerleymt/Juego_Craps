@@ -11,7 +11,7 @@ public class Model_craps {
     }
 
     public void tiro_regla(int tiro){
-        reglas_tiro tirar_dados = new reglas_tiro();
+        Reglas_tiro tirar_dados = new Reglas_tiro();
         tirar_dados.setTiro(tiro);
     }
 }

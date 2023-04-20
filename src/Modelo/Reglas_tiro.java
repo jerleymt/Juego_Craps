@@ -1,13 +1,13 @@
 package Modelo;
 
-public class reglas_tiro {
+public class Reglas_tiro {
     int estado, validacion_tiro, punto, tiro;
 
-    public reglas_tiro(int estado) {
+    public Reglas_tiro(int estado) {
         this.estado = estado;
     }
 
-    public reglas_tiro() {
+    public Reglas_tiro() {
         this.estado = 0;
         this.validacion_tiro = 0;
         this.punto = 0;
@@ -65,8 +65,9 @@ public class reglas_tiro {
             setEstado(4);
             setValidacion_tiro(0);
         }
-        if (tiro == 7){
-
+        else if (tiro == 7){
+            setEstado(5);
+            setValidacion_tiro(0);
         }
     }
 
