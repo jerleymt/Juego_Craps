@@ -1,6 +1,6 @@
 package Control;
 
-import Modelo.Reglas_tiro;
+import Modelo.Model_craps;
 import Modelo.Tirar_dados;
 
 /**
@@ -19,7 +19,7 @@ public class Controlador {
         //Creo un objeto donde tiro unos dados el cual recibe n cantidad de dados
         //creo un objeto que aplicara la regla
         Tirar_dados tirar = new Tirar_dados(numero_de_dados);
-        Reglas_tiro jugar = new Reglas_tiro();
+        Model_craps jugar = new Model_craps();
 
         //Aqui tiro el o los dados
         tirar.tirar_dado();

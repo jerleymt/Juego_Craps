@@ -1,8 +1,6 @@
 package Vista;
 
 import Control.Controlador;
-import Modelo.Reglas_tiro;
-import Modelo.Tirar_dados;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,8 +11,22 @@ import java.awt.*;
  * @version v.1.0.0 date:21/03/2023
  */
 public class GUI extends JFrame {
+    // "final" significa que esta variable es constante, siempre se nombran con MAYUSCULAS y snake_case
+    public static final String MENSAJE_FINAL="Bienvenido a Craps"
+                        +"\nOprime el botón lanzar para iniciar el juego"
+                        +"\nSi tu tiro de salida es 7 u 11 ganas con Natural"
+                        +"\nSi tu tiro de salida es 2, 3 u 12 pierdes con Craps"
+                        +"\nSi sacas cualquier otT_o valor establecerás el Punto"
+                        +"\nEstado en pyntp podrás seyggt lanzando los dados"
+                        +"\npero ahora ganarás si sacas nuevamente el valor del Punto"
+                        +"\nsin que previamente hayas sacado 7";
 
     private Header headerProject;
+    private JLabel dado1, dado2;
+    private JButton lanzar;
+    private JPanel panel_dados, panel_resultado;
+    private ImageIcon imagen_dado;
+    private JTextArea resultado;
 
     /**
      * Constructor of GUI class
@@ -23,9 +35,9 @@ public class GUI extends JFrame {
         initGUI();
 
         //Default JFrame configuration
-        this.setTitle("The Title app");
-        this.setSize(200,100);
-        //this.pack();
+        this.setTitle("Juego Craps | erley");
+//        this.setSize(200,100);
+        this.pack();
         this.setResizable(true);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -40,9 +52,31 @@ public class GUI extends JFrame {
         //Set up JFrame Container's Layout
         //Create Listener Object and Control Object
         //Set up JComponents
-        headerProject = new Header("Header ...", Color.BLACK);
-
+        headerProject = new Header("Mesa Juego Craps", Color.BLACK);
         this.add(headerProject,BorderLayout.NORTH); //Change this line if you change JFrame Container's Layout
+
+        //"getClass" es un puntero; acedo a un metodo de cualquier clase
+        imagen_dado = new ImageIcon(getClass().getResource("/Recursos/dado.png"));
+        dado1 = new JLabel(imagen_dado);
+        dado2 = new JLabel(imagen_dado);
+
+        lanzar = new JButton("LANZAR");
+
+        panel_dados = new JPanel();
+        panel_dados.setPreferredSize(new Dimension(400,250));
+        panel_dados.setBorder(BorderFactory.createTitledBorder("Tus dados"));
+        panel_dados.add(dado1);
+        panel_dados.add(dado2);
+        panel_dados.add(lanzar);
+
+        this.add(panel_dados,BorderLayout.CENTER);
+
+        resultado = new JTextArea(7,31);
+        resultado.setText(MENSAJE_FINAL);
+        resultado.setBorder((BorderFactory.createTitledBorder("Que deves hacer")));
+        JScrollPane scrolear = new JScrollPane(resultado);
+        this.add(scrolear,BorderLayout.EAST);
+
     }
 
     /**

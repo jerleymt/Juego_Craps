@@ -1,14 +1,14 @@
 package Modelo;
 
-public class Reglas_tiro {
+public class Model_craps {
     int estado, validacion_tiro, punto, tiro;
     String estado_string;
 
-    public Reglas_tiro(int estado) {
+    public Model_craps(int estado) {
         this.estado = estado;
     }
 
-    public Reglas_tiro() {
+    public Model_craps() {
         estado = 0;
         validacion_tiro = 0;
         punto = 0;
