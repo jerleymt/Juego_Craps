@@ -7,6 +7,7 @@ import java.awt.*;
  * This class is used for ...
  * @autor Carlos Felipe Montoya carlos.felipe.montoya@correounivalle.edu.co
  * @version v.1.0.0 date:21/03/2023
+ * puff
  */
 public class GUI extends JFrame {
 
