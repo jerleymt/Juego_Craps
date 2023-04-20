@@ -1,4 +1,4 @@
-package Juego_craps;
+package Modelo;
 
 public class reglas_tiro {
     int estado, validacion_tiro, punto, tiro;

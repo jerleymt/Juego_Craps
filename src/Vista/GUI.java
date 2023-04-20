@@ -1,4 +1,7 @@
-package Juego_craps;
+package Vista;
+
+import Modelo.Header;
+import Modelo.Tirar_dados;
 
 import javax.swing.*;
 import java.awt.*;

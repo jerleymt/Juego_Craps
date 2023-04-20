@@ -1,4 +1,4 @@
-package Juego_craps;
+package Modelo;
 /**
  * Esta clase aplica las reglas del juego
  * */

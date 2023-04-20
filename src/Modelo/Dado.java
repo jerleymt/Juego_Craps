@@ -1,4 +1,4 @@
-package Juego_craps;
+package Modelo;
 
 import java.util.Random;
 

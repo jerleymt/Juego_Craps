@@ -1,4 +1,4 @@
-package Juego_craps;
+package Modelo;
 
 import javax.swing.*;
 import java.awt.*;
