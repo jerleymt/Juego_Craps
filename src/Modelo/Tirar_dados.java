@@ -8,10 +8,10 @@ import java.util.Vector;
 public class Tirar_dados {
     private final Vector<Dado> dado;
     private int tiro;
-    private final int cantidad_de_dados;
+    private int cantidad_de_dados;
     private int sumatoria;
     //Vector donde se guarda las dos caras del dado
-    private final Vector<Integer> caras;
+    private Vector<Integer> caras;
 
     public Tirar_dados() {
         dado = new Vector<Dado>();
@@ -25,7 +25,15 @@ public class Tirar_dados {
         tiro = 0;
         sumatoria = 0;
         caras = new Vector<>(0);
-        this.cantidad_de_dados=cantidad_de_dados-1;
+//        this.cantidad_de_dados=cantidad_de_dados-1;
+    }
+
+    public int getCantidad_de_dados() {
+        return cantidad_de_dados;
+    }
+
+    public void setCantidad_de_dados(int cantidad_de_dados) {
+        this.cantidad_de_dados = cantidad_de_dados - 1;
     }
 
     public Vector<Dado> getDado() {
@@ -53,8 +61,16 @@ public class Tirar_dados {
         this.tiro = tiro;
     }
 
-    public void tirar_dado() {
-        for (int i = 0; i <= cantidad_de_dados ; i++){
+    public Vector<Integer> getCaras() {
+        return caras;
+    }
+
+    public void setCaras(Vector<Integer> caras) {
+        this.caras = caras;
+    }
+
+    public void tirar_dado(int cantidad_de_dados) {
+        for (int i = 0; i <= cantidad_de_dados -1 ; i++){
             //Toma un dado y lo mete a un vector de dados
             setDado(new Dado());
             //Obtiene el dado lanzado y lo mete en un vector de caras

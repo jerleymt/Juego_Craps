@@ -1,9 +1,14 @@
 package Vista;
 
 import Control.Controlador;
+import Modelo.Model_craps;
+import Modelo.Tirar_dados;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Vector;
 
 /**
  * This class is used for ...
@@ -27,6 +32,10 @@ public class GUI extends JFrame {
     private JPanel panel_dados, panel_resultado;
     private ImageIcon imagen_dado;
     private JTextArea resultado;
+    private Escucha get_escucha;
+    private Tirar_dados lanzar_dado;
+    private Model_craps model_craps;
+    private Controlador control;
 
     /**
      * Constructor of GUI class
@@ -51,6 +60,10 @@ public class GUI extends JFrame {
     private void initGUI() {
         //Set up JFrame Container's Layout
         //Create Listener Object and Control Object
+        get_escucha = new Escucha();
+        lanzar_dado = new Tirar_dados();
+        model_craps = new Model_craps();
+        control = new Controlador();
         //Set up JComponents
         headerProject = new Header("Mesa Juego Craps", Color.BLACK);
         this.add(headerProject,BorderLayout.NORTH); //Change this line if you change JFrame Container's Layout
@@ -61,6 +74,7 @@ public class GUI extends JFrame {
         dado2 = new JLabel(imagen_dado);
 
         lanzar = new JButton("LANZAR");
+        lanzar.addActionListener(get_escucha);
 
         panel_dados = new JPanel();
         panel_dados.setPreferredSize(new Dimension(400,250));
@@ -77,6 +91,8 @@ public class GUI extends JFrame {
         JScrollPane scrolear = new JScrollPane(resultado);
         this.add(scrolear,BorderLayout.EAST);
 
+
+
     }
 
     /**
@@ -87,17 +103,31 @@ public class GUI extends JFrame {
     public static void main(String[] args){
         EventQueue.invokeLater(() -> {
             GUI miProjectGUI = new GUI();
-            Controlador iniciar_juego = new Controlador(2);
-            int flag = iniciar_juego.getFlag();
-            iniciar_juego.setFlag(flag);
-            iniciar_juego.inicio();
-            System.out.println("GUI flag = "+iniciar_juego.getFlag());
+//            Controlador iniciar_juego = new Controlador(2);
+//            int flag = iniciar_juego.getFlag();
+//            iniciar_juego.setFlag(flag);
+//            iniciar_juego.inicio();
+//            System.out.println("GUI flag = "+iniciar_juego.getFlag());
         });
     }
     /**
      * inner class that extends an Adapter Class or implements Listeners used by GUI class
      */
-    private class Escucha {
+    private class Escucha implements ActionListener {
 
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            control.inicio(2);
+            Vector<Integer> face = control.getCara();
+            System.out.println("\n/Recursos/"+face.get(0)+".png");
+            System.out.println("\n/Recursos/"+face.get(1)+".png");
+            imagen_dado = new ImageIcon(getClass().getResource("/Recursos/"+face.get(0)+".png"));
+            dado1.setIcon(imagen_dado);
+            imagen_dado = new ImageIcon(getClass().getResource("/Recursos/"+face.get(1)+".png"));
+            dado2.setIcon(imagen_dado);
+
+//            model_craps.getEstado();
+//            resultado.setText(model_craps.getEstado_string());
+        }
     }
 }
