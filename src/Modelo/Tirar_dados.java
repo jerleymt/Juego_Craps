@@ -69,7 +69,7 @@ public class Tirar_dados {
         this.caras = caras;
     }
 
-    public void tirar_dado(int cantidad_de_dados) {
+    public void iniciar(int cantidad_de_dados) {
         for (int i = 0; i <= cantidad_de_dados -1 ; i++){
             //Toma un dado y lo mete a un vector de dados
             setDado(new Dado());

@@ -90,9 +90,6 @@ public class GUI extends JFrame {
         resultado.setBorder((BorderFactory.createTitledBorder("Que deves hacer")));
         JScrollPane scrolear = new JScrollPane(resultado);
         this.add(scrolear,BorderLayout.EAST);
-
-
-
     }
 
     /**
@@ -119,15 +116,15 @@ public class GUI extends JFrame {
         public void actionPerformed(ActionEvent e) {
             control.inicio(2);
             Vector<Integer> face = control.getCara();
-            System.out.println("\n/Recursos/"+face.get(0)+".png");
-            System.out.println("\n/Recursos/"+face.get(1)+".png");
             imagen_dado = new ImageIcon(getClass().getResource("/Recursos/"+face.get(0)+".png"));
             dado1.setIcon(imagen_dado);
             imagen_dado = new ImageIcon(getClass().getResource("/Recursos/"+face.get(1)+".png"));
             dado2.setIcon(imagen_dado);
 
-//            model_craps.getEstado();
-//            resultado.setText(model_craps.getEstado_string());
+            resultado.setText(control.getEstado_string());
+
+            System.out.println("\nGUI /Recursos/"+face.get(0)+".png");
+            System.out.println("GUI /Recursos/"+face.get(1)+".png\n");
         }
     }
 }

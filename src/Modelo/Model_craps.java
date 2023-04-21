@@ -22,15 +22,19 @@ public class Model_craps {
 
     public String getEstado_string() {
         switch (getEstado()){
-            case 1: estado_string = "|!GANASTE¡|";
+            case 0: estado_string = "Sique lansando hasta sacar \""+punto+"\"\n"
+                                    +"Si sacas \"7\" antes que \""+punto+"\" perderás";
+                    break;
+            case 1: estado_string = "|Haz sacado un natural !GANASTE¡|";
                 break;
-            case 2: estado_string = "|!CRAPS¡|";
+            case 2: estado_string = "Sacaste Craps, has perdido!!";
                 break;
-            case 3: estado_string = "|!PUNTO¡|";
+            case 3: estado_string = "Estableaste Punto en \""+punto+"\" Debes seguir lanzando!!\n" +
+                                    "Pero si sacas \"7\" antes que \""+punto+"\" perderás";
                 break;
-            case 4: estado_string = "|!GANASTE EN RONDA PUNTO¡|";
+            case 4: estado_string = "Volviste a sacar \""+punto+"\" haz ganado!!";
                 break;
-            case 5: estado_string = "|CRAPS EN RONDA PUNTO|";
+            case 5: estado_string = "Sacaste \"7\" antes que "+punto+" haz perdido!!";
                 break;
         }
         return estado_string;
@@ -82,7 +86,7 @@ public class Model_craps {
                 setEstado(3);
                 setPunto(getTiro());
                 setValidacion_tiro(1);
-                System.out.println("|!PUNTO¡|");
+                System.out.println("|!PUNTO¡|"+getPunto());
             }
         }
         else {
@@ -102,6 +106,7 @@ public class Model_craps {
             setValidacion_tiro(0);
             System.out.println("|CRAPS EN RONDA PUNTO|");
         }
+        System.out.println("tiro "+getTiro()+ " punto " +punto);
     }
 
 }

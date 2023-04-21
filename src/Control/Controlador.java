@@ -11,7 +11,8 @@ import java.util.Vector;
 public class Controlador {
     private int numero_de_dados;
     Vector<Integer> cara;
-    int flag;
+    int flag, estado, punto;
+    String Estado_string;
 
     public Controlador() {
         this.numero_de_dados = numero_de_dados;
@@ -25,24 +26,26 @@ public class Controlador {
     public void inicio(int numero_de_dados){
         //Creo un objeto donde tiro unos dados el cual recibe n cantidad de dados
         //creo un objeto que aplicara la regla
-        Tirar_dados tirar = new Tirar_dados();
-        Model_craps jugar = new Model_craps();
+        Tirar_dados _tirar_dados = new Tirar_dados();
+        Model_craps _model_craps = new Model_craps();
 
         //Aqui tiro el o los dados
-        tirar.tirar_dado(numero_de_dados);
-        setCara(tirar.getCaras());
+        _tirar_dados.iniciar(numero_de_dados);
 
         //Recojo el resultado de los dados y lo capturo en la clase de regla
-        jugar.setValidacion_tiro(getFlag());
-        jugar.setTiro(tirar.getSumatoria());
-        jugar.ronda_tiro();
-        setFlag( jugar.getValidacion_tiro());
+        _model_craps.setPunto(getPunto());
+        _model_craps.setValidacion_tiro(getFlag());
+        _model_craps.setTiro(_tirar_dados.getSumatoria());
+        _model_craps.ronda_tiro();
+        setPunto(_model_craps.getPunto());
 
+        setCara(_tirar_dados.getCaras());
+        setFlag( _model_craps.getValidacion_tiro());
+        setEstado(_model_craps.getEstado());
+        setEstado_string(_model_craps.getEstado_string());
 
-
-        System.out.println("estado del juego = "+jugar.getEstado()+" || El tiro fue "+tirar.getSumatoria());
-        System.out.println("\n|Bandera|"+jugar.getValidacion_tiro()+"\n");
-
+        System.out.println("\nCONTROL estado del juego = "+_model_craps.getEstado()+" || El tiro fue "+_tirar_dados.getSumatoria());
+        System.out.println("CONTROL |Bandera|"+_model_craps.getValidacion_tiro());
     }
 
     public int getNumero_de_dados() {
@@ -67,5 +70,29 @@ public class Controlador {
 
     public void setCara(Vector<Integer> cara) {
         this.cara = cara;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
+    public String getEstado_string() {
+        return Estado_string;
+    }
+
+    public void setEstado_string(String estado_string) {
+        this.Estado_string = estado_string;
+    }
+
+    public int getPunto() {
+        return punto;
+    }
+
+    public void setPunto(int punto) {
+        this.punto = punto;
     }
 }
