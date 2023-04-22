@@ -31,11 +31,13 @@ public class GUI extends JFrame {
     private JButton lanzar;
     private JPanel panel_dados, panel_resultado;
     private ImageIcon imagen_dado;
-    private JTextArea resultado;
+    private JTextArea mostrar_resultado, mostrar_punto;
     private Escucha get_escucha;
     private Tirar_dados lanzar_dado;
     private Model_craps model_craps;
     private Controlador control;
+    private JScrollPane scrolear;
+    private JSeparator separator;
 
     /**
      * Constructor of GUI class
@@ -83,13 +85,24 @@ public class GUI extends JFrame {
         panel_dados.add(dado2);
         panel_dados.add(lanzar);
 
-        this.add(panel_dados,BorderLayout.CENTER);
+        mostrar_punto = new JTextArea(6,31);
 
-        resultado = new JTextArea(7,31);
-        resultado.setText(MENSAJE_FINAL);
-        resultado.setBorder((BorderFactory.createTitledBorder("Que deves hacer")));
-        JScrollPane scrolear = new JScrollPane(resultado);
-        this.add(scrolear,BorderLayout.EAST);
+        mostrar_resultado = new JTextArea(6,31);
+        mostrar_resultado.setText(MENSAJE_FINAL);
+        scrolear = new JScrollPane(mostrar_resultado);
+
+        separator = new JSeparator();
+        separator.setPreferredSize(new Dimension(350,7));
+        separator.setBackground(Color.BLACK);
+
+        panel_resultado = new JPanel();
+        panel_resultado.setPreferredSize(new Dimension(400,250));
+        String texto_panel = new String();
+        panel_resultado.setBorder(BorderFactory.createTitledBorder("Que debes hacer"));
+        panel_resultado.add(scrolear);
+
+        this.add(panel_dados,BorderLayout.CENTER);
+        this.add(panel_resultado,BorderLayout.EAST);
     }
 
     /**
@@ -100,11 +113,6 @@ public class GUI extends JFrame {
     public static void main(String[] args){
         EventQueue.invokeLater(() -> {
             GUI miProjectGUI = new GUI();
-//            Controlador iniciar_juego = new Controlador(2);
-//            int flag = iniciar_juego.getFlag();
-//            iniciar_juego.setFlag(flag);
-//            iniciar_juego.inicio();
-//            System.out.println("GUI flag = "+iniciar_juego.getFlag());
         });
     }
     /**
@@ -121,10 +129,20 @@ public class GUI extends JFrame {
             imagen_dado = new ImageIcon(getClass().getResource("/Recursos/"+face.get(1)+".png"));
             dado2.setIcon(imagen_dado);
 
-            resultado.setText(control.getEstado_string());
 
-            System.out.println("\nGUI /Recursos/"+face.get(0)+".png");
-            System.out.println("GUI /Recursos/"+face.get(1)+".png\n");
+            //quita todo lo que tenia
+            panel_resultado.removeAll();
+            panel_resultado.setBorder(BorderFactory.createTitledBorder("Resultado"));
+
+            panel_resultado.add(mostrar_resultado);
+            panel_resultado.add(separator);
+            panel_resultado.add(mostrar_punto);
+
+            mostrar_resultado.setText(control.getEstado_string().get(1));
+            mostrar_punto.setText(control.getEstado_string().get(0));
+
+            revalidate();
+            repaint();
         }
     }
 }

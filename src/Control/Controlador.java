@@ -12,7 +12,7 @@ public class Controlador {
     private int numero_de_dados;
     Vector<Integer> cara;
     int flag, estado, punto;
-    String Estado_string;
+    Vector<String>Estado_string;
 
     public Controlador() {
         this.numero_de_dados = numero_de_dados;
@@ -80,12 +80,12 @@ public class Controlador {
         this.estado = estado;
     }
 
-    public String getEstado_string() {
+    public Vector<String> getEstado_string() {
         return Estado_string;
     }
 
-    public void setEstado_string(String estado_string) {
-        this.Estado_string = estado_string;
+    public void setEstado_string(Vector<String> estado_string) {
+        Estado_string = estado_string;
     }
 
     public int getPunto() {

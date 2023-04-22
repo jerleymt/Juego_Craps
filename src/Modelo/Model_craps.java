@@ -1,8 +1,10 @@
 package Modelo;
 
+import java.util.Vector;
+
 public class Model_craps {
-    int estado, validacion_tiro, punto, tiro;
-    String estado_string;
+    private int estado, validacion_tiro, punto, tiro;
+    private Vector<String> estado_string;
 
     public Model_craps(int estado) {
         this.estado = estado;
@@ -13,35 +15,41 @@ public class Model_craps {
         validacion_tiro = 0;
         punto = 0;
         tiro = 0;
-        estado_string = "";
+        estado_string = new Vector<String>();
     }
 
     public int getValidacion_tiro() {
         return validacion_tiro;
     }
 
-    public String getEstado_string() {
+    public Vector<String> getEstado_string() {
         switch (getEstado()){
-            case 0: estado_string = "Sique lansando hasta sacar \""+punto+"\"\n"
-                                    +"Si sacas \"7\" antes que \""+punto+"\" perderás";
+            case 0: setEstado_string("Sique lansando hasta sacar \""+punto+"\"\n"
+                    +"Si sacas \"7\" antes que \""+punto+"\" perderás");
+                     setEstado_string("Tu tiro de salida fue ("+punto+")");
                     break;
-            case 1: estado_string = "|Haz sacado un natural !GANASTE¡|";
+            case 1: setEstado_string("|Haz sacado un natural !GANASTE¡|");
+                setEstado_string("Tiro de salida ("+tiro+")");
                 break;
-            case 2: estado_string = "Sacaste Craps, has perdido!!";
+            case 2: setEstado_string("Sacaste Craps, has perdido!!");
+                setEstado_string("Tu tiro de salida fue ("+tiro+")");
                 break;
-            case 3: estado_string = "Estableaste Punto en \""+punto+"\" Debes seguir lanzando!!\n" +
-                                    "Pero si sacas \"7\" antes que \""+punto+"\" perderás";
+            case 3: setEstado_string("Estableaste Punto en \""+punto+"\" Debes seguir lanzando!!\n" +
+                    "Pero si sacas \"7\" antes que \""+punto+"\" perderás");
+                setEstado_string("Tu tiro fue ("+tiro+")"+"\nHiciste punto" );
                 break;
-            case 4: estado_string = "Volviste a sacar \""+punto+"\" haz ganado!!";
+            case 4: setEstado_string("Volviste a sacar \""+punto+"\" haz ganado!!");
+                setEstado_string("Tu tiro de salida fue ("+punto+")");
                 break;
-            case 5: estado_string = "Sacaste \"7\" antes que "+punto+" haz perdido!!";
+            case 5: setEstado_string("Sacaste \"7\" antes que "+punto+" haz perdido!!");
+                setEstado_string("Tu tiro fue ("+tiro+")");
                 break;
         }
         return estado_string;
     }
 
-    public void setEstado_string(String estado_string) {
-        this.estado_string = estado_string;
+    public void setEstado_string(String texto) {
+        estado_string.addElement(texto);
     }
 
     public void setValidacion_tiro(int validacion_tiro) {
