@@ -24,25 +24,31 @@ public class Model_craps {
 
     public Vector<String> getEstado_string() {
         switch (getEstado()){
-            case 0: setEstado_string("Sique lansando hasta sacar \""+punto+"\"\n"
-                    +"Si sacas \"7\" antes que \""+punto+"\" perderás");
-                     setEstado_string("Tu tiro de salida fue ("+punto+")");
-                    break;
-            case 1: setEstado_string("|Haz sacado un natural !GANASTE¡|");
-                setEstado_string("Tiro de salida ("+tiro+")");
-                break;
-            case 2: setEstado_string("Sacaste Craps, has perdido!!");
-                setEstado_string("Tu tiro de salida fue ("+tiro+")");
-                break;
-            case 3: setEstado_string("Estableaste Punto en \""+punto+"\" Debes seguir lanzando!!\n" +
-                    "Pero si sacas \"7\" antes que \""+punto+"\" perderás");
-                setEstado_string("Tu tiro fue ("+tiro+")"+"\nHiciste punto" );
-                break;
-            case 4: setEstado_string("Volviste a sacar \""+punto+"\" haz ganado!!");
+            case 0:
                 setEstado_string("Tu tiro de salida fue ("+punto+")");
+                setEstado_string("Sique lansando hasta sacar \""+punto+"\"\n"
+                    +"Si sacas \"7\" antes que \""+punto+"\" perderás");
+                    break;
+            case 1:
+                setEstado_string("Tiro de salida ("+tiro+")");
+                setEstado_string("|Haz sacado un natural !GANASTE¡|");
                 break;
-            case 5: setEstado_string("Sacaste \"7\" antes que "+punto+" haz perdido!!");
+            case 2:
+                setEstado_string("Tu tiro de salida fue ("+tiro+")");
+                setEstado_string("Sacaste Craps, has perdido!!");
+                break;
+            case 3:
+                setEstado_string("Tu tiro fue ("+tiro+")"+"\nHiciste punto" );
+                setEstado_string("Estableaste Punto en \""+punto+"\" Debes seguir lanzando!!\n" +
+                    "Pero si sacas \"7\" antes que \""+punto+"\" perderás");
+                break;
+            case 4:
+                setEstado_string("Tu tiro de salida fue ("+punto+")");
+                setEstado_string("Volviste a sacar \""+punto+"\" haz ganado!!");
+                break;
+            case 5:
                 setEstado_string("Tu tiro fue ("+tiro+")");
+                setEstado_string("Sacaste \"7\" antes que "+punto+" haz perdido!!");
                 break;
         }
         return estado_string;
