@@ -85,23 +85,25 @@ public class GUI extends JFrame {
         panel_dados.add(dado2);
         panel_dados.add(lanzar);
 
+        this.add(panel_dados,BorderLayout.CENTER);
+
         mostrar_punto = new JTextArea(6,31);
+        mostrar_punto.setBackground(null);
 
         mostrar_resultado = new JTextArea(6,31);
+        mostrar_resultado.setBackground(null);
         mostrar_resultado.setText(MENSAJE_FINAL);
         scrolear = new JScrollPane(mostrar_resultado);
 
         separator = new JSeparator();
         separator.setPreferredSize(new Dimension(350,7));
-        separator.setBackground(Color.BLACK);
+        separator.setBackground(Color.RED);
 
         panel_resultado = new JPanel();
         panel_resultado.setPreferredSize(new Dimension(400,250));
-        String texto_panel = new String();
         panel_resultado.setBorder(BorderFactory.createTitledBorder("Que debes hacer"));
         panel_resultado.add(scrolear);
 
-        this.add(panel_dados,BorderLayout.CENTER);
         this.add(panel_resultado,BorderLayout.EAST);
     }
 
@@ -138,8 +140,8 @@ public class GUI extends JFrame {
             panel_resultado.add(separator);
             panel_resultado.add(mostrar_punto);
 
-            mostrar_resultado.setText(control.getEstado_string().get(1));
-            mostrar_punto.setText(control.getEstado_string().get(0));
+            mostrar_resultado.setText(control.getEstado_string().get(0));
+            mostrar_punto.setText(control.getEstado_string().get(1));
 
             revalidate();
             repaint();
