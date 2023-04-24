@@ -1,4 +1,4 @@
-package Juego_craps;
+package Vista;
 
 import javax.swing.*;
 import java.awt.*;
