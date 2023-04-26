@@ -25,7 +25,7 @@ public class GUIGridBagLayout extends JFrame {
     private JButton lanzar, ayuda, salir;
     private JPanel panel_dados, panel_resultado;
     private ImageIcon imagen_dado;
-    private JTextArea mostrar_resultado, mostrar_punto;
+    private JTextArea mostrar_resultado, mostrar_punto, mensaje_salida;
     private Escucha get_escucha;
     private Tirar_dados lanzar_dado;
     private Model_craps model_craps;
@@ -64,6 +64,80 @@ public class GUIGridBagLayout extends JFrame {
         constraints.fill=GridBagConstraints.HORIZONTAL;
 
         this.add(headerProject,constraints); //Change this line if you change JFrame Container's Layout
+
+        ayuda = new JButton(" ? ");
+        ayuda.addActionListener(get_escucha);
+        constraints.gridx=0;
+        constraints.gridy=1;
+        constraints.gridwidth=1;
+        constraints. fill=GridBagConstraints .NONE;
+        constraints. anchor=GridBagConstraints.LINE_START;
+
+        this.add(ayuda,constraints);
+
+        salir = new JButton("SALIR");
+        salir.addActionListener(get_escucha);
+        constraints.gridx=1;
+        constraints.gridy=1;
+        constraints.gridwidth=1;
+        constraints. fill=GridBagConstraints .NONE;
+        constraints. anchor=GridBagConstraints.LINE_END;
+
+        this.add(salir,constraints);
+
+        imagen_dado = new ImageIcon(getClass().getResource("/Recursos/dado.png"));
+        dado1 = new JLabel(imagen_dado);
+        dado2 = new JLabel(imagen_dado);
+
+        panel_dados = new JPanel();
+        panel_dados.setPreferredSize(new Dimension(350,200));
+        panel_dados.setBorder(BorderFactory.createTitledBorder("Tus dados"));
+        panel_dados.add(dado1);
+        panel_dados.add(dado2);
+
+        constraints.gridx=0;
+        constraints.gridy=2;
+        constraints.gridwidth=1;
+        constraints. fill=GridBagConstraints .BOTH;
+        constraints. anchor=GridBagConstraints.CENTER;
+        this.add(panel_dados,constraints);
+
+        mostrar_resultado = new JTextArea(6,31);
+        mostrar_resultado.setBackground(null);
+        mostrar_resultado.setText("Debes lanzar los dados");
+        mostrar_resultado.setBorder(BorderFactory.createTitledBorder("Resultados"));
+
+        constraints.gridx=1;
+        constraints.gridy=2;
+        constraints.gridwidth=1;
+        constraints. fill=GridBagConstraints.BOTH;
+        constraints. anchor=GridBagConstraints.CENTER;
+        this.add(mostrar_resultado,constraints);
+
+        lanzar = new JButton("LANZAR");
+        lanzar.addActionListener(get_escucha);
+
+        constraints.gridx=0;
+        constraints.gridy=3;
+        constraints.gridwidth=2;
+        constraints. fill=GridBagConstraints.NONE;
+        constraints. anchor=GridBagConstraints.CENTER;
+        this.add(lanzar,constraints);
+
+        mensaje_salida = new JTextArea(4,31);
+        mensaje_salida.setBackground(null);
+        mensaje_salida.setText("Usa el boton ayuda para ver las reglas del juego");
+        mensaje_salida.setBorder(BorderFactory.createTitledBorder("Mensajes"));
+        scrolear = new JScrollPane(mensaje_salida);
+
+        constraints.gridx=0;
+        constraints.gridy=4;
+        constraints.gridwidth=2;
+        constraints. fill=GridBagConstraints.NONE;
+        constraints. anchor=GridBagConstraints.CENTER;
+        this.add(scrolear,constraints);
+
+
     }
 
     public static void main(String[] args){
@@ -76,23 +150,32 @@ public class GUIGridBagLayout extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            control.inicio(2);
-            Vector<Integer> face = control.getCara();
-            imagen_dado = new ImageIcon(getClass().getResource("/Recursos/"+face.get(0)+".png"));
-            dado1.setIcon(imagen_dado);
-            imagen_dado = new ImageIcon(getClass().getResource("/Recursos/"+face.get(1)+".png"));
-            dado2.setIcon(imagen_dado);
+            if (e.getActionCommand()=="LANZAR") {
+                control.inicio(2);
+                Vector<Integer> face = control.getCara();
+                imagen_dado = new ImageIcon(getClass().getResource("/Recursos/" + face.get(0) + ".png"));
+                dado1.setIcon(imagen_dado);
+                imagen_dado = new ImageIcon(getClass().getResource("/Recursos/" + face.get(1) + ".png"));
+                dado2.setIcon(imagen_dado);
 
+//                //quita todo lo que tenia
+//                panel_resultado.removeAll();
+//                panel_resultado.setBorder(BorderFactory.createTitledBorder("Resultado"));
+//
+//                panel_resultado.add(mostrar_resultado);
+//                panel_resultado.add(mensaje_salida);
 
-            //quita todo lo que tenia
-            panel_resultado.removeAll();
-            panel_resultado.setBorder(BorderFactory.createTitledBorder("Resultado"));
+                mostrar_resultado.setText(control.getEstado_string().get(0));
+                mensaje_salida.setText(control.getEstado_string().get(1));
+            }
+            else if (e.getActionCommand()==" ? "){
 
-            panel_resultado.add(mostrar_resultado);
-            panel_resultado.add(mostrar_punto);
+                mensaje_salida.setText(MENSAJE_FINAL);
+            }
+            else if (e.getActionCommand()=="SALIR"){
 
-            mostrar_resultado.setText(control.getEstado_string().get(0));
-            mostrar_punto.setText(control.getEstado_string().get(1));
+                mensaje_salida.setText("SALIR");
+            }
 
         }
     }
