@@ -23,7 +23,7 @@ public class GUIGridBagLayout extends JFrame {
     private Header headerProject;
     private JLabel dado1, dado2;
     private JButton lanzar, ayuda, salir;
-    private JPanel panel_dados, panel_resultado;
+    private JPanel panel_dados, panel_resultado, margen;
     private ImageIcon imagen_dado;
     private JTextArea mostrar_resultado, mostrar_punto, mensaje_salida;
     private Escucha get_escucha;
@@ -31,16 +31,19 @@ public class GUIGridBagLayout extends JFrame {
     private Model_craps model_craps;
     private Controlador control;
     private JScrollPane scrolear;
+    private   Insets insets;
 
     public GUIGridBagLayout() {
         initGUI();
         //Default JFrame configuration
         this.setTitle("Juego Craps | erley");
+        this.setUndecorated(true);
+//        this.setLocationRelativeTo(null);
+//        this.setBackground(new Color(255,255,255,100));
         this.pack();
         this.setResizable(true);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     private void initGUI() {
@@ -106,6 +109,7 @@ public class GUIGridBagLayout extends JFrame {
         mostrar_resultado.setBackground(null);
         mostrar_resultado.setText("Debes lanzar los dados");
         mostrar_resultado.setBorder(BorderFactory.createTitledBorder("Resultados"));
+        mostrar_resultado.setEditable(false);
 
         constraints.gridx=1;
         constraints.gridy=2;
@@ -124,18 +128,27 @@ public class GUIGridBagLayout extends JFrame {
         constraints. anchor=GridBagConstraints.CENTER;
         this.add(lanzar,constraints);
 
+        //Creo un objeto deltipo insent para hacer el margen que luego pongoen un borde vacio
+        insets = new Insets(25, 10, 25, 10);
+
         mensaje_salida = new JTextArea(4,31);
         mensaje_salida.setBackground(null);
         mensaje_salida.setText("Usa el boton ayuda para ver las reglas del juego");
+        mensaje_salida.setEditable(false);
         mensaje_salida.setBorder(BorderFactory.createTitledBorder("Mensajes"));
-        scrolear = new JScrollPane(mensaje_salida);
+
+        margen = new JPanel();
+        margen.setBorder(BorderFactory.createEmptyBorder(insets.top, insets.left, insets.bottom, insets.right));
+        margen.add(mensaje_salida);
+
+//        scrolear = new JScrollPane(mensaje_salida);
 
         constraints.gridx=0;
         constraints.gridy=4;
         constraints.gridwidth=2;
         constraints. fill=GridBagConstraints.NONE;
         constraints. anchor=GridBagConstraints.CENTER;
-        this.add(scrolear,constraints);
+        this.add(margen,constraints);
 
 
     }
@@ -158,24 +171,18 @@ public class GUIGridBagLayout extends JFrame {
                 imagen_dado = new ImageIcon(getClass().getResource("/Recursos/" + face.get(1) + ".png"));
                 dado2.setIcon(imagen_dado);
 
-//                //quita todo lo que tenia
-//                panel_resultado.removeAll();
-//                panel_resultado.setBorder(BorderFactory.createTitledBorder("Resultado"));
-//
-//                panel_resultado.add(mostrar_resultado);
-//                panel_resultado.add(mensaje_salida);
-
                 mostrar_resultado.setText(control.getEstado_string().get(0));
                 mensaje_salida.setText(control.getEstado_string().get(1));
             }
             else if (e.getActionCommand()==" ? "){
-
-                mensaje_salida.setText(MENSAJE_FINAL);
+                JOptionPane.showMessageDialog(null,MENSAJE_FINAL);
             }
             else if (e.getActionCommand()=="SALIR"){
 
-                mensaje_salida.setText("SALIR");
+                System.exit(0);
             }
+
+
 
         }
     }
